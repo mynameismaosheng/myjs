@@ -1,0 +1,2 @@
+# myjs
+All of js
