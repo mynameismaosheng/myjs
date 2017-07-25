@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <style type="text/css">
+    	.styleCss{
+    		background: red;
+    	}
+    	*{
+    		font-family: "微软雅黑";
+    		outline: 0;
+    	}
+    	input{
+    			height: 30px;
+			    line-height: 30px;
+			    border: 1px solid #e6e6e6;
+			    background-color: #fff;
+			    border-radius: 2px;
+			    padding: 0 3px;
+    	}
+    	input:focus{
+    			border-color: #C9C9C9!important;
+    	}
+    	button{
+    		    display: inline-block;
+				    height: 33px;
+				    line-height: 30px;
+				    padding: 0 18px;
+				    border: 1px solid #C9C9C9;
+				    background-color: #fff;
+				    color: #555;
+				    white-space: nowrap;
+				    text-align: center;
+				    font-size: 14px;
+				    border-radius: 2px;
+				    cursor: pointer;
+				    opacity: .9;
+				    filter: alpha(opacity=90);
+    	}
+    </style>
+  </head>
+  <body>
+  	<p>给定一个整数数组，数组的“平衡位”是这样的位置： 它左边所有的数字之和===右边所有数字之和。
+
+ 例如
+arr = [1，2，3，0，6] 
+这个数组中， 0所在的位置是“平衡位”， 因为左边数字之和 1+2+3=6
+右边数字之和6=6
+0所在的位置下标为3, 亦即， arr[3] === 0
+
+请用react写一个小app， 界面上允许输入一个数组， 点击按钮后， 显示“平衡位”的下标。
+如果平衡位不存在， 就显示-1.</p>
+<hr />
+    <div id="example"></div>
+    <hr />
+    <div id="example2"></div>
+    <script type="text/babel">
+    	var Content = React.createClass({
+	      render: function() {
+	      	var thisValue = this.props.myDataProp
+	      	,arr = thisValue.split(',')
+	      	,okindex = -1, okdata
+	      	,newArr;
+	      	$.each(arr, function(i,n) {
+	      		if(i > 0 && i < arr.length - 1){ //不可以是第一个 且不可能是最后一个
+	      				newArr = arr;
+	      				var prevArr = newArr.slice(0,i)
+	      				,nextArr = newArr.slice(i + 1,arr.length)
+	      				,prevTotal = 0 
+	      				,nextTotal = 0;
+	      				$.each(prevArr, function(ip,np) {
+	      					 prevTotal += parseInt(np);
+	      				});
+	      				$.each(nextArr, function(np,nn) {
+	      						nextTotal += parseInt(nn);
+	      				});
+	      				if(prevTotal === nextTotal){
+	      						okindex = i;
+	      						okdata = arr[i];
+	      				}
+	      		}	
+	      	});
+	        return  <div>
+	                <input type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp} /> 
+	                <span>输入数字,号分割</span>
+	                <p>平衡位置:{okindex},平衡数值:{okdata}</p>
+	                </div>;
+	      }
+	    });
+    var ComputeArray = React.createClass({
+      getInitialState: function() {
+        return {value: '1,0,1'};
+      },
+      handleChange: function(event) {
+        this.setState({value: event.target.value});
+      },
+      render: function() {
+        var value = this.state.value;
+        return <div>
+                <Content myDataProp = {value} 
+                  updateStateProp = {this.handleChange}></Content>
+               </div>;
+      }
+    });
+    var ClickGet = React.createClass({
+    	getInitialState: function () {
+          return { okdataarray: '[1,2,2,3]' };
+      },
+      handleClick: function(event) {
+      	var okindex = -1;
+      	 this.setState(function(data){
+      	 		var arr = eval('(' + data.okdataarray + ')')
+		      	, okdata
+		      	,newArr;
+		      	$.each(arr, function(i,n) {
+		      		if(i > 0 && i < arr.length - 1){ //不可以是第一个 且不可能是最后一个
+		      				newArr = arr;
+		      				var prevArr = newArr.slice(0,i)
+		      				,nextArr = newArr.slice(i + 1,arr.length)
+		      				,prevTotal = 0 
+		      				,nextTotal = 0;
+		      				console.log(prevArr,nextArr)
+		      				$.each(prevArr, function(ip,np) {
+		      					 prevTotal += parseInt(np);
+		      				});
+		      				$.each(nextArr, function(np,nn) {
+		      						nextTotal += parseInt(nn);
+		      				});
+		      				console.log(prevTotal,nextTotal)
+		      				if(prevTotal === nextTotal){
+		      						okindex = i;
+		      						okdata = arr[i];
+		      				}
+		      		}	
+		      	});
+		      	return {Index: okindex}
+      	 })
+      },
+      handleChange: function(event) {
+        this.setState({okdataarray: event.target.value});
+      },
+      render: function() {
+        return <div>
+                <input type="text" defaultValue={this.state.okdataarray} onChange={this.handleChange} />
+                <button onClick={this.handleClick}>获取平衡位置</button>
+                <h1>{this.state.Index}</h1>
+               </div>;
+      }
+    });
+    ReactDOM.render(
+      <ComputeArray />,
+      document.getElementById('example')
+    );
+    ReactDOM.render(
+        <ClickGet />,
+        document.getElementById('example2')
+    );
+    </script>
+  </body>
+</html>
