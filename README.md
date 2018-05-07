@@ -1,8 +1,7 @@
-# js练习
+@2018/05/07
+*use node to do project server*
+1. Learning is the purpose.
+2. Is willing to take the way to the people who learn it.
+3. That's it.
 
-### react 数组平衡位
-* 循环得到的数组, 去掉下标为1和为最后的一位的可能
-* 得到符合以上逻辑当前的下标, 以此下标分成两组数组但都不包含此下标的值
-* 分别得到两个数组内的函数相加的值来做比较,当完全相等的时候, 则此时下标即为"平衡位"
-* 此程序只存在一个"平衡位"
-* 此程序需正确的数组和正确的输入格式
+### where there is a will, there is a way.
