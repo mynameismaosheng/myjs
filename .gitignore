@@ -20,3 +20,4 @@ selenium-debug.log
 *.sln
 
 package-lock.json
+test.*

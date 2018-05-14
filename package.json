@@ -1,0 +1,11 @@
+{
+  "name": "myjs",
+  "author": "Maunsell",
+  "bugs": {
+    "url": "https://github.com/mynameismaosheng/myjs/issues"
+  },
+  "homepage": "https://github.com/mynameismaosheng/myjs#readme",
+  "devDependencies": {
+    "mysql": "^2.15.0"
+  }
+}
