@@ -10,15 +10,16 @@ fs.readFile('./talk.txt', {encoding : 'utf-8'} ,(err,data) => {
     if (!fs.existsSync(talkMp3)) {
         fs.mkdirSync(talkMp3);
     }
-    let mp3stean;
+    let dhh = fs.createWriteStream(talkMp3 + '/大禹治水.mp3');
     txtArr(data).forEach(function(item,index){
         client.text2audio(item, {tex:'utf-8'}).then(function(result){
             if(result.data){
                 // console.log('语音合并成功' );
-                // fs.writeFile(talkMp3 + '/大禹治水'+index+'.mp3', result.data)
-                
-                mp3stean += result.data
-                console.log('mp3stean', mp3stean)
+                // fs.writeFile(talkMp3 + '/大禹治水'+index+'.mp3', result.data) //true
+                /*  error  */
+                // let stream = fs.createReadStream(result.data);
+                // stream.pipe(dhh ,{ end: false })
+
                 // if(index == txtArr(data).length - 1){
                 //     console.log('语音流合并成功' );
                 //     fs.writeFile(talkMp3 + '/大禹治水.mp3', mp3stean)
