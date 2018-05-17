@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "baidu-aip-sdk": "^2.3.1"
+  }
+}

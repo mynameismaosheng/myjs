@@ -6,6 +6,7 @@
   },
   "homepage": "https://github.com/mynameismaosheng/myjs#readme",
   "devDependencies": {
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "request": "^2.86.0"
   }
 }
