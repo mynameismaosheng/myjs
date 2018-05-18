@@ -11,14 +11,17 @@ files.forEach(function (file) {
 
 function main() {
     if (!clips.length) {
+        fs.rmdirSync('./talkMp3')
         dhh.end("Done");
         return;
     }
     currentfile = './talkMp3/' + clips.shift();
     stream = fs.createReadStream(currentfile);
     stream.pipe(dhh, {end: false});
+    
     stream.on("end", function() {
         console.log(currentfile + ' appended');
+        fs.unlinkSync(currentfile)
         main();        
     });
 }
