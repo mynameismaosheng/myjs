@@ -15,4 +15,4 @@ app.use(allowCrossDomain)
 
 app.use('/api', testRouter);  
 http.createServer(app).listen(3000);  
-console.log('localhost:3000/api/getData')
+console.log('启动api')
