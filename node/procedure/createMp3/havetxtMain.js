@@ -25,7 +25,7 @@ function main(txt,response){
         txtArr(txt).forEach(function(item,index){
             client.text2audio(item, {tex:'utf-8'}).then(function(result){
                 if(result.data){
-                    fs.writeFile(talkMp3 + '/大禹治水'+index+'.mp3', result.data, () => {
+                    fs.writeFile(talkMp3 + '/荷塘月色'+index+'.mp3', result.data, () => {
                         complateFile ++ 
                         console.log(complateFile,txtArr(txt).length)
                         if(complateFile === txtArr(txt).length){

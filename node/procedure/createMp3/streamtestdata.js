@@ -3,7 +3,7 @@ var fs = require('fs'),
     clips = [],
     stream,
     currentfile,
-    dhh = fs.createWriteStream('./大禹治水.mp3');
+    dhh = fs.createWriteStream('./荷塘月色.mp3');
 
 files.forEach(function (file) {
     clips.push(file);  
@@ -11,7 +11,7 @@ files.forEach(function (file) {
 
 function main() {
     if (!clips.length) {
-        fs.rmdirSync('./talkMp3')
+        // fs.rmdirSync('./talkMp3')
         dhh.end("Done");
         return;
     }
@@ -21,7 +21,7 @@ function main() {
     
     stream.on("end", function() {
         console.log(currentfile + ' appended');
-        fs.unlinkSync(currentfile)
+        // fs.unlinkSync(currentfile)
         main();        
     });
 }

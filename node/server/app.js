@@ -14,5 +14,5 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain)
 
 app.use('/api', testRouter);  
-http.createServer(app).listen(3000);  
+http.createServer(app).listen(6891);  
 console.log('启动api')
